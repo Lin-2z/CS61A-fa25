@@ -52,7 +52,9 @@ def digit_distance(n):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    if n < 10:
+        return 0
+    return abs(n % 10 - (n // 10) % 10) + digit_distance(n // 10)
 
 def interleaved_sum(n, f_odd, f_even):
     """Compute the sum f_odd(1) + f_even(2) + f_odd(3) + ..., up
