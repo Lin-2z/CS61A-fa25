@@ -364,9 +364,20 @@ def final_strategy(score, opponent_score):
     """Write a brief description of your final strategy.
 
     *** YOUR DESCRIPTION HERE ***
+    This strategy combines the sus_strategy with a few additional rules:
+    1. If rolling 0 dice gives a score increase of at least 8 points, roll 0 dice.
+    2. If the player is behind by 15 or more points, roll 10 dice to maximize scoring potential.
+    3. If the player is ahead by 20 or more points, roll 4 dice to minimize risk.
+    4. Otherwise, use the sus_strategy with a threshold of 10 and roll 6 dice.
     """
     # BEGIN PROBLEM 12
-    return 6  # Remove this line once implemented.
+    if sus_points(score + boar_brawl(score, opponent_score)) - score >= 10:
+        return 0
+    if opponent_score - score >= 15:
+        return 10
+    if score - opponent_score >= 20:
+        return 4
+    return 6
     # END PROBLEM 12
 
 
