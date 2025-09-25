@@ -245,6 +245,12 @@ def is_always_roll(strategy, goal=GOAL):
     """
     # BEGIN PROBLEM 7
     "*** YOUR CODE HERE ***"
+    first_roll = strategy(0, 0)
+    for score in range(goal):
+        for opponent_score in range(goal):
+            if strategy(score, opponent_score) != first_roll:
+                return False
+    return True
     # END PROBLEM 7
 
 
