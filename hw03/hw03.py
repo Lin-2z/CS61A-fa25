@@ -168,7 +168,18 @@ def count_dollars_upward(total):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    if total == 0:
+        return 1
+    def helper(amount, bill):
+        if amount < 0 or bill is None:
+            return 0
+        elif amount == 0:
+            return 1
+        else:
+            with_bill = helper(amount - bill, bill)
+            without_bill = helper(amount, next_larger_dollar(bill))
+            return with_bill + without_bill
+    return helper(total, 1)
 
 def print_move(origin, destination):
     """Print instructions to move a disk."""
