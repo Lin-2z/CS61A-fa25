@@ -289,8 +289,8 @@ def max_scoring_num_rolls(dice=six_sided, times_called=1000):
     "*** YOUR CODE HERE ***"
     max_average = 0
     best_num_rolls = 1
+    averaged_roll = make_averaged(roll_dice, times_called)
     for num_rolls in range(1, 11):
-        averaged_roll = make_averaged(roll_dice, times_called)
         average_score = averaged_roll(num_rolls, dice)
         if average_score > max_average:
             max_average = average_score
@@ -302,10 +302,7 @@ def max_scoring_num_rolls(dice=six_sided, times_called=1000):
 def winner(strategy0, strategy1):
     """Return 0 if strategy0 wins against strategy1, and 1 otherwise."""
     score0, score1 = play(strategy0, strategy1, sus_update)
-    if score0 > score1:
-        return 0
-    else:
-        return 1
+    return 0 if score0 > score1 else 1
 
 
 def average_win_rate(strategy, baseline=always_roll(6)):
