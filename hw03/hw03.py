@@ -78,7 +78,14 @@ def interleaved_sum(n, f_odd, f_even):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    def helper(i, odd):
+        if i > n:
+            return 0
+        elif odd:
+            return f_odd(i) + helper(i + 1, False)
+        else:
+            return f_even(i) + helper(i + 1, True)
+    return helper(1, True)
 
 def next_smaller_dollar(bill):
     """Returns the next smaller bill in order."""
