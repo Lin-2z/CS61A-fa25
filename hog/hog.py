@@ -1,5 +1,6 @@
 """The Game of Hog."""
 
+import math
 from dice import six_sided, make_test_dice
 from ucb import main, trace, interact
 import math
@@ -83,7 +84,7 @@ def simple_update(num_rolls, player_score, opponent_score, dice=six_sided):
 
 
 def is_prime(n):
-    """Return whether N is prime."""
+    """Return whether N is prime. (optimized version)"""
     if n <= 1:
         return False
     if n % 2 == 0:
@@ -102,13 +103,13 @@ def num_factors(n):
     if n <= 0:
         return 0
     count = 0
-
-    for i in range(1, math.isqrt(n) + 1):
+    limit = int(math.isqrt(n))
+    for i in range(1, limit + 1, 1):
         if n % i == 0:
             if i * i == n:
-                count += 1   
+                count += 1  
             else:
-                count += 2   
+                count += 2
     return count
     # END PROBLEM 4
 
