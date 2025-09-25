@@ -1,5 +1,6 @@
 """The Game of Hog."""
 
+import math
 from dice import six_sided, make_test_dice
 from ucb import main, trace, interact
 
@@ -82,14 +83,15 @@ def simple_update(num_rolls, player_score, opponent_score, dice=six_sided):
 
 
 def is_prime(n):
-    """Return whether N is prime."""
-    if n == 1:
+    """Return whether N is prime. (optimized version)"""
+    if n <= 1:
         return False
-    k = 2
-    while k < n:
+    if n % 2 == 0:
+        return n == 2
+    limit = int(math.isqrt(n))
+    for k in range(3, limit + 1, 2): 
         if n % k == 0:
             return False
-        k += 1
     return True
 
 
@@ -97,10 +99,16 @@ def num_factors(n):
     """Return the number of factors of N, including 1 and N itself."""
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    if n <= 0:
+        return 0
     count = 0
-    for i in range(1, n + 1):
+    limit = int(math.isqrt(n))
+    for i in range(1, limit + 1, 1):
         if n % i == 0:
-            count += 1
+            if i * i == n:
+                count += 1  
+            else:
+                count += 2
     return count
     # END PROBLEM 4
 
@@ -111,12 +119,10 @@ def sus_points(score):
     "*** YOUR CODE HERE ***"
     if score < 2 or is_prime(score):
         return score
-    if num_factors(score) == 3 or num_factors(score) == 4:
-        for i in range(score + 1, 2 * score):
-            if is_prime(i):
-                return i
-    return score
-    # END PROBLEM 4
+    factors = num_factors(score)
+    if factors == 3 or factors == 4:
+
+ND PROBLEM 4
 
 
 def sus_update(num_rolls, player_score, opponent_score, dice=six_sided):
