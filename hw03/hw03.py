@@ -121,7 +121,18 @@ def count_dollars(total):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    if total == 0:
+        return 1
+    def helper(amount, bill):
+        if amount < 0 or bill is None:
+            return 0
+        elif amount == 0:
+            return 1
+        else:
+            with_bill = helper(amount - bill, bill)
+            without_bill = helper(amount, next_smaller_dollar(bill))
+            return with_bill + without_bill
+    return helper(total, 100)
 
 def next_larger_dollar(bill):
     """Returns the next larger bill in order."""
